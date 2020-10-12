@@ -1,0 +1,379 @@
+function myFunction() {
+  var spreadSheet = SpreadsheetApp.getActiveSheet();
+  var dataRange = spreadSheet.getDataRange();
+  // Fetch values for each row in the Range.
+  var data = dataRange.getValues();
+  var text = "Hope you are doing well!\nThis is to remind you that webinar on \"Enhancing your Career Opportunities with education abroad\" by alumini of Stanford School of Business, Mr. Abhishek Mitra, is scheduled on Friday, 12th June at 11.00am.\n\nKindly download the application \"GoToWebinar\" and register on the below given link for further details.\nWebinar link:  https://attendee.gotowebinar.com/register/2682158967747107339\n\nIncase of any queries, feel free to contact us on:\nEmail: techteamcsi@gmail.com\nVyom Binani : 9022471505\n\nRegards,\nCSI Team";
+  for (var i = 1; i < data.length; i++) {
+    (function(val) {
+      var row = data[i];
+      var emailAddress = row[1]; //position of email header — 1
+      Var name = row[2]; // position of name header — 1
+      var message = "Dear " + name + ",\n\n" + text;
+      var subject = "CSI Webinar Link";
+      MailApp.sendEmail(emailAddress, subject, message);
+      })(i);
+   }
+}
+
+
+Dear Hrishikesh M Bharadwaj,
+
+Hope you are doing well!
+This is to remind you that a webinar on "Enhancing your Career Opportunities with education abroad" by alumni of Stanford School of Business, Mr. Abhishek Mitra, is scheduled on Friday, 12th June at 11.00am.
+
+Kindly download the application "GoToWebinar" and register on the below given link for further details.
+Webinar link: https://attendee.gotowebinar.com/register/2682158967747107339
+
+Incase of any queries, feel free to contact us on:
+Email: techteamcsi@gmail.com
+Vyom Binani : 9022471505
+
+Regards,
+CSI Team
+
+
+
+// This constant is written in column C for rows for which an email
+// has been sent successfully.
+var EMAIL_SENT = 'EMAIL_SENT';
+
+/**
+ * Sends non-duplicate emails with data from the current spreadsheet.
+ */
+/*
+function sendEmails2() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var startRow = 1701; // First row of data to process
+  var numRows = 708; // Number of rows to process
+  // Fetch the range of cells A2:B3
+  var dataRange = sheet.getRange(startRow, 1, numRows, 3);
+  // Fetch values for each row in the Range.
+  var data = dataRange.getValues();
+  for (var i = 0; i < data.length; ++i) {
+    var row = data[i];
+    var emailAddress = row[1]; //email id
+    var message = "<p>Howdy Coder,</p>"
+    +"<p>There\'s more than Laddus for you in <b>Project Code 2.0</b>, a 24 hour coding contest by <b>Infinite Loop, KJSIEIT</b>! We now have <b>₹ 33,000</b> worth of prizes up for grabs!</p>"
+    +"<p>We feel ecstatic to announce the title sponsor for Project Code 2.0 - <b>DEMUX Academy</b>, a placement incubator founded by ex-Flipkart and ex-Oracle engineers and with a strong and small team of people from <b>Facebook</b>, <b>Adobe</b> and <b>Amazon</b>.They train you for what it takes to work in the FAANG companies!</p>"
+    +"<p>So what are you guys waiting for? Register now and stand a chance to win exciting prizes!</p>"
+    +"<p>Date: 1st July 2020 at 3PM</p>" 
+    +"<p><b>Registration Link:</b> https://www.codechef.com/PROC2020</p>"
+    +"<p>Entry Fee - <b>₹0</b></p>"
+    +"<p>All you need is an account on Codechef.</p>"
+    +"<p>Top 10 percentile will be awarded with a ranked certificate. Every participant will be awarded with a participation certificate.</p>"
+    +"<p>Regards,Infinite Loop, KJSIEIT Mumbai.</p>";
+    
+    var emailSent = row[3]; // Third column
+    if (emailSent !== EMAIL_SENT) { // Prevents sending duplicates
+      var subject = 'Invitation for Project Code 2.0';
+      MailApp.sendEmail(emailAddress, subject, message);
+      sheet.getRange(startRow + i, 4).setValue(EMAIL_SENT);
+      // Make sure the cell is updated right away in case the script is interrupted
+      SpreadsheetApp.flush();
+    }
+  }
+}
+*/
+
+function myFunction() {
+  var spreadSheet = SpreadsheetApp.getActiveSheet();
+  var dataRange = spreadSheet.getDataRange();
+  // Fetch values for each row in the Range.
+  var data = dataRange.getValues();
+  /*var text = "<p>Howdy Coder,</p>"
+    +"<p>There\'s more than Laddus for you in <b>Project Code 2.0</b>, a 24 hour coding contest by <b>Infinite Loop, KJSIEIT</b>! We now have <b>₹ 33,000</b> worth of prizes up for grabs!</p>"
+    +"<p>We feel ecstatic to announce the title sponsor for Project Code 2.0 - <b>DEMUX Academy</b>, a placement incubator founded by ex-Flipkart and ex-Oracle engineers and with a strong and small team of people from <b>Facebook</b>, <b>Adobe</b> and <b>Amazon</b>.They train you for what it takes to work in the FAANG companies!</p>"
+    +"<p>So what are you guys waiting for? Register now and stand a chance to win exciting prizes!</p>"
+    +"<p>Date: 1st July 2020 at 3PM</p>" 
+    +"<p><b>Registration Link:</b> https://www.codechef.com/PROC2020</p>"
+    +"<p>Entry Fee - <b>₹0</b></p>"
+    +"<p>All you need is an account on Codechef.</p>"
+    +"<p>Top 10 percentile will be awarded with a ranked certificate. Every participant will be awarded with a participation certificate.</p>"
+    +"<p>Regards,Infinite Loop, KJSIEIT Mumbai.</p>";*/
+  var templ = HtmlService.createTemplateFromFile('candidate-email');
+  var message = templ.evaluate().getContent();
+  for (var i = 1; i < 2; i++) {
+    (function(val) {
+      var row = data[i];
+      var emailAddress = row[1]; //position of email header — 1
+      var name = row[2]; // position of name header — 1
+      var subj = "Sponsor Announcement for Project Code 2.0 | Prizes worth ₹ 33,000!";
+      var emailSent = row[3];
+      if (emailSent !== EMAIL_SENT) {
+        MailApp.sendEmail({
+          to: emailAddress,
+          subject: subj,
+          htmlBody: message
+        });
+        sheet.getRange(startRow + i, 4).setValue(EMAIL_SENT);
+        SpreadsheetApp.flush();
+      }
+      })(i);
+   }
+}
+     //"<p>Howdy Coder,</p><p>There\'s more than Laddus for you in <b>Project Code 2.0</b>, a 24 hour coding contest by <b>Infinite Loop, KJSIEIT</b>! We now have <b>₹ 33,000</b> worth of prizes up for grabs!</p><p>We feel ecstatic to announce the title sponsor for Project Code 2.0 - <b>DEMUX Academy</b>, a placement incubator founded by ex-Flipkart and ex-Oracle engineers and with a strong and small team of people from <b>Facebook</b>, <b>Adobe</b> and <b>Amazon</b>.They train you for what it takes to work in the FAANG companies!</p><p>So what are you guys waiting for? Register now and stand a chance to win exciting prizes!</p><p>Date: 1st July 2020 at 3PM</p><p><b>Registration Link:</b> https://www.codechef.com/PROC2020</p><p>Entry Fee - <b>₹0</b></p><p>All you need is an account on Codechef.</p><p>Top 10 percentile will be awarded with a ranked certificate. Every participant will be awarded with a participation certificate.</p>"
+
+/*
+    var message = "<p>Howdy Coder,</p>"
+    +"<p>There\'s more than Laddus for you in <b>Project Code 2.0</b>, a 24 hour coding contest by <b>Infinite Loop, KJSIEIT</b>! We now have <b>₹ 33,000</b> worth of prizes up for grabs!</p>"
+    +"<p>We feel ecstatic to announce the title sponsor for Project Code 2.0 - <b>DEMUX Academy</b>, a placement incubator founded by ex-Flipkart and ex-Oracle engineers and with a strong and small team of people from <b>Facebook</b>, <b>Adobe</b> and <b>Amazon</b>.They train you for what it takes to work in the FAANG companies!</p>"
+    +"<p>So what are you guys waiting for? Register now and stand a chance to win exciting prizes!</p>"
+    +"<p>Date: 1st July 2020 at 3PM</p>" 
+    +"<p><b>Registration Link:</b> https://www.codechef.com/PROC2020</p>"
+    +"<p>Entry Fee - <b>₹0</b></p>"
+    +"<p>All you need is an account on Codechef.</p>"
+    +"<p>Top 10 percentile will be awarded with a ranked certificate. Every participant will be awarded with a participation certificate.</p>"
+    +"<p>Regards,Infinite Loop, KJSIEIT Mumbai.</p>";
+*/
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    <p>Howdy Coder,</p>
+    <p>There's more than Laddus for you in <strong>Project Code 2.0</strong>, a 24 hour coding contest by <strong>Infinite Loop, KJSIEIT</strong>! We now have <strong>₹ 33,000</strong> worth of prizes up for grabs!</p>
+    <p>We feel ecstatic to announce the title sponsor for Project Code 2.0 - <strong>DEMUX Academy</strong>, a placement incubator founded by ex-Flipkart and ex-Oracle engineers and with a strong and small team of people from <strong>Facebook</strong>, <strong>Adobe</strong> and <strong>Amazon</strong>.They train you for what it takes to work in the FAANG companies! To know more, click <a href = "https://demux.in/">here</a></p>
+    <p>So what are you guys waiting for? Register now and stand a chance to win exciting prizes!</p>
+    <p>Date: 1st July 2020 at 3PM</p>
+    <p><strong>Registration Link:</strong> https://www.codechef.com/PROC2020</p>
+    <p>Entry Fee - <b>₹0</b></p>
+    <p>All you need is an account on Codechef.</p>
+    <p>Top 10 percentile will be awarded with a ranked certificate. Every participant will be awarded with a participation certificate.</p>
+    <p>Regards,Infinite Loop</p>
+    <p>KJSIEIT Mumbai.</p>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+// This constant is written in column C for rows for which an email
+// has been sent successfully.
+var EMAIL_SENT = 'EMAIL_SENT';
+
+/**
+ * Sends non-duplicate emails with data from the current spreadsheet.
+ */
+/*
+function sendEmails2() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var startRow = 1701; // First row of data to process
+  var numRows = 708; // Number of rows to process
+  // Fetch the range of cells A2:B3
+  var dataRange = sheet.getRange(startRow, 1, numRows, 3);
+  // Fetch values for each row in the Range.
+  var data = dataRange.getValues();
+  for (var i = 0; i < data.length; ++i) {
+    var row = data[i];
+    var emailAddress = row[1]; //email id
+    var message = "<p>Howdy Coder,</p>"
+    +"<p>There\'s more than Laddus for you in <b>Project Code 2.0</b>, a 24 hour coding contest by <b>Infinite Loop, KJSIEIT</b>! We now have <b>₹ 33,000</b> worth of prizes up for grabs!</p>"
+    +"<p>We feel ecstatic to announce the title sponsor for Project Code 2.0 - <b>DEMUX Academy</b>, a placement incubator founded by ex-Flipkart and ex-Oracle engineers and with a strong and small team of people from <b>Facebook</b>, <b>Adobe</b> and <b>Amazon</b>.They train you for what it takes to work in the FAANG companies!</p>"
+    +"<p>So what are you guys waiting for? Register now and stand a chance to win exciting prizes!</p>"
+    +"<p>Date: 1st July 2020 at 3PM</p>" 
+    +"<p><b>Registration Link:</b> https://www.codechef.com/PROC2020</p>"
+    +"<p>Entry Fee - <b>₹0</b></p>"
+    +"<p>All you need is an account on Codechef.</p>"
+    +"<p>Top 10 percentile will be awarded with a ranked certificate. Every participant will be awarded with a participation certificate.</p>"
+    +"<p>Regards,Infinite Loop, KJSIEIT Mumbai.</p>";
+    
+    var emailSent = row[3]; // Third column
+    if (emailSent !== EMAIL_SENT) { // Prevents sending duplicates
+      var subject = 'Invitation for Project Code 2.0';
+      MailApp.sendEmail(emailAddress, subject, message);
+      sheet.getRange(startRow + i, 4).setValue(EMAIL_SENT);
+      // Make sure the cell is updated right away in case the script is interrupted
+      SpreadsheetApp.flush();
+    }
+  }
+}
+*/
+
+function myFunction() {
+  var spreadSheet = SpreadsheetApp.getActiveSheet();
+  var dataRange = spreadSheet.getDataRange();
+  var data = dataRange.getValues();
+  var templ = HtmlService.createTemplateFromFile('candidate-email');
+  var startRow = 0;
+  for (var i = 1; i < 2; i++) {
+    (function(val) {
+      var row = data[i];
+      var emailAddress = row[1];
+      var subj = "Sponsor Announcement for Project Code 2.0 | Prizes worth ₹ 33,000!";
+      var emailSent = row[3];
+      //if (emailSent !== EMAIL_SENT) {
+        var message = templ.evaluate().getContent();
+        MailApp.sendEmail({to: emailAddress, subject: subj, htmlBody: message});
+        sheet.getRange(startRow + i, 4).setValue(EMAIL_SENT);
+        SpreadsheetApp.flush();
+      //}
+      })(i);
+   }
+}
+     //"<p>Howdy Coder,</p><p>There\'s more than Laddus for you in <b>Project Code 2.0</b>, a 24 hour coding contest by <b>Infinite Loop, KJSIEIT</b>! We now have <b>₹ 33,000</b> worth of prizes up for grabs!</p><p>We feel ecstatic to announce the title sponsor for Project Code 2.0 - <b>DEMUX Academy</b>, a placement incubator founded by ex-Flipkart and ex-Oracle engineers and with a strong and small team of people from <b>Facebook</b>, <b>Adobe</b> and <b>Amazon</b>.They train you for what it takes to work in the FAANG companies!</p><p>So what are you guys waiting for? Register now and stand a chance to win exciting prizes!</p><p>Date: 1st July 2020 at 3PM</p><p><b>Registration Link:</b> https://www.codechef.com/PROC2020</p><p>Entry Fee - <b>₹0</b></p><p>All you need is an account on Codechef.</p><p>Top 10 percentile will be awarded with a ranked certificate. Every participant will be awarded with a participation certificate.</p>"
+
+/*
+    var message = "<p>Howdy Coder,</p>"
+    +"<p>There\'s more than Laddus for you in <b>Project Code 2.0</b>, a 24 hour coding contest by <b>Infinite Loop, KJSIEIT</b>! We now have <b>₹ 33,000</b> worth of prizes up for grabs!</p>"
+    +"<p>We feel ecstatic to announce the title sponsor for Project Code 2.0 - <b>DEMUX Academy</b>, a placement incubator founded by ex-Flipkart and ex-Oracle engineers and with a strong and small team of people from <b>Facebook</b>, <b>Adobe</b> and <b>Amazon</b>.They train you for what it takes to work in the FAANG companies!</p>"
+    +"<p>So what are you guys waiting for? Register now and stand a chance to win exciting prizes!</p>"
+    +"<p>Date: 1st July 2020 at 3PM</p>" 
+    +"<p><b>Registration Link:</b> https://www.codechef.com/PROC2020</p>"
+    +"<p>Entry Fee - <b>₹0</b></p>"
+    +"<p>All you need is an account on Codechef.</p>"
+    +"<p>Top 10 percentile will be awarded with a ranked certificate. Every participant will be awarded with a participation certificate.</p>"
+    +"<p>Regards,Infinite Loop, KJSIEIT Mumbai.</p>";
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+00000000000000000000000000000000000000000000000000000000000000000
+
+
+
+function myFunction() {
+  var spreadSheet = SpreadsheetApp.getActiveSheet();
+  var dataRange = spreadSheet.getDataRange();
+  // Fetch values for each row in the Range.
+  var data = dataRange.getValues();
+  //var text = "Hope you are doing well!\nThis is to remind you that webinar on \"Enhancing your Career Opportunities with education abroad\" by alumini of Stanford School of Business, Mr. Abhishek Mitra, is scheduled on Friday, 12th June at 11.00am.\n\nKindly download the application \"GoToWebinar\" and register on the below given link for further details.\nWebinar link:  https://attendee.gotowebinar.com/register/2682158967747107339\n\nIncase of any queries, feel free to contact us on:\nEmail: techteamcsi@gmail.com\nVyom Binani : 9022471505\n\nRegards,\nCSI Team";
+  for (var i = 2; i < 3; i++) {
+    (function(val) {
+      var templ = HtmlService.createTemplateFromFile('candidate-email');
+      var msg = templ.evaluate().getContent();
+      var row = data[i];
+      var emailAddress = row[1];
+      //MailApp.sendEmail(emailAddress, subject, message);
+      MailApp.sendEmail({
+        to: emailAddress,
+        subject: "Sponsor Announcement for Project Code 2.0 Prizes worth ₹ 33,000!",
+        htmlBody: msg
+      });
+      SpreadsheetApp.getActiveSheet().getRange(row, 4).setValue('approved');
+      })(i);
+   }
+}
+
+/*
+// This constant is written in column C for rows for which an email
+// has been sent successfully.
+var EMAIL_SENT = 'EMAIL_SENT';
+
+/**
+ * Sends non-duplicate emails with data from the current spreadsheet.
+ */
+/*
+function sendEmails2() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var startRow = 1701; // First row of data to process
+  var numRows = 708; // Number of rows to process
+  // Fetch the range of cells A2:B3
+  var dataRange = sheet.getRange(startRow, 1, numRows, 3);
+  // Fetch values for each row in the Range.
+  var data = dataRange.getValues();
+  for (var i = 0; i < data.length; ++i) {
+    var row = data[i];
+    var emailAddress = row[1]; //email id
+    var message = "<p>Howdy Coder,</p>"
+    +"<p>There\'s more than Laddus for you in <b>Project Code 2.0</b>, a 24 hour coding contest by <b>Infinite Loop, KJSIEIT</b>! We now have <b>₹ 33,000</b> worth of prizes up for grabs!</p>"
+    +"<p>We feel ecstatic to announce the title sponsor for Project Code 2.0 - <b>DEMUX Academy</b>, a placement incubator founded by ex-Flipkart and ex-Oracle engineers and with a strong and small team of people from <b>Facebook</b>, <b>Adobe</b> and <b>Amazon</b>.They train you for what it takes to work in the FAANG companies!</p>"
+    +"<p>So what are you guys waiting for? Register now and stand a chance to win exciting prizes!</p>"
+    +"<p>Date: 1st July 2020 at 3PM</p>" 
+    +"<p><b>Registration Link:</b> https://www.codechef.com/PROC2020</p>"
+    +"<p>Entry Fee - <b>₹0</b></p>"
+    +"<p>All you need is an account on Codechef.</p>"
+    +"<p>Top 10 percentile will be awarded with a ranked certificate. Every participant will be awarded with a participation certificate.</p>"
+    +"<p>Regards,Infinite Loop, KJSIEIT Mumbai.</p>";
+    
+    var emailSent = row[3]; // Third column
+    if (emailSent !== EMAIL_SENT) { // Prevents sending duplicates
+      var subject = 'Invitation for Project Code 2.0';
+      MailApp.sendEmail(emailAddress, subject, message);
+      sheet.getRange(startRow + i, 4).setValue(EMAIL_SENT);
+      // Make sure the cell is updated right away in case the script is interrupted
+      SpreadsheetApp.flush();
+    }
+  }
+}
+*/
+/*
+function myFunction() {
+  var spreadSheet = SpreadsheetApp.getActiveSheet();
+  var dataRange = spreadSheet.getDataRange();
+  // Fetch values for each row in the Range.
+  var data = dataRange.getValues();
+  /*var text = "<p>Howdy Coder,</p>"
+    +"<p>There\'s more than Laddus for you in <b>Project Code 2.0</b>, a 24 hour coding contest by <b>Infinite Loop, KJSIEIT</b>! We now have <b>₹ 33,000</b> worth of prizes up for grabs!</p>"
+    +"<p>We feel ecstatic to announce the title sponsor for Project Code 2.0 - <b>DEMUX Academy</b>, a placement incubator founded by ex-Flipkart and ex-Oracle engineers and with a strong and small team of people from <b>Facebook</b>, <b>Adobe</b> and <b>Amazon</b>.They train you for what it takes to work in the FAANG companies!</p>"
+    +"<p>So what are you guys waiting for? Register now and stand a chance to win exciting prizes!</p>"
+    +"<p>Date: 1st July 2020 at 3PM</p>" 
+    +"<p><b>Registration Link:</b> https://www.codechef.com/PROC2020</p>"
+    +"<p>Entry Fee - <b>₹0</b></p>"
+    +"<p>All you need is an account on Codechef.</p>"
+    +"<p>Top 10 percentile will be awarded with a ranked certificate. Every participant will be awarded with a participation certificate.</p>"
+    +"<p>Regards,Infinite Loop, KJSIEIT Mumbai.</p>";*/
+/*
+  var templ = HtmlService.createTemplateFromFile('candidate-email');
+  var message = templ.evaluate().getContent();
+  for (var i = 1; i < 2; i++) {
+    (function(val) {
+      var row = data[i];
+      var emailAddress = row[1]; //position of email header — 1
+      var name = row[2]; // position of name header — 1
+      var subj = "Prizes worth Sponsor Announcement for Project Code 2.0";
+      //MailApp.sendEmail(emailAddress, subject, message);
+      var emailSent = row[3];
+      MailApp.sendEmail({
+        to: emailAddress,
+        subject: subj,
+        htmlBody: message
+      });
+      })(i);
+   }
+}
+*/
+     //"<p>Howdy Coder,</p><p>There\'s more than Laddus for you in <b>Project Code 2.0</b>, a 24 hour coding contest by <b>Infinite Loop, KJSIEIT</b>! We now have <b>₹ 33,000</b> worth of prizes up for grabs!</p><p>We feel ecstatic to announce the title sponsor for Project Code 2.0 - <b>DEMUX Academy</b>, a placement incubator founded by ex-Flipkart and ex-Oracle engineers and with a strong and small team of people from <b>Facebook</b>, <b>Adobe</b> and <b>Amazon</b>.They train you for what it takes to work in the FAANG companies!</p><p>So what are you guys waiting for? Register now and stand a chance to win exciting prizes!</p><p>Date: 1st July 2020 at 3PM</p><p><b>Registration Link:</b> https://www.codechef.com/PROC2020</p><p>Entry Fee - <b>₹0</b></p><p>All you need is an account on Codechef.</p><p>Top 10 percentile will be awarded with a ranked certificate. Every participant will be awarded with a participation certificate.</p>"
+
+/*
+    var message = "<p>Howdy Coder,</p>"
+    +"<p>There\'s more than Laddus for you in <b>Project Code 2.0</b>, a 24 hour coding contest by <b>Infinite Loop, KJSIEIT</b>! We now have <b>₹ 33,000</b> worth of prizes up for grabs!</p>"
+    +"<p>We feel ecstatic to announce the title sponsor for Project Code 2.0 - <b>DEMUX Academy</b>, a placement incubator founded by ex-Flipkart and ex-Oracle engineers and with a strong and small team of people from <b>Facebook</b>, <b>Adobe</b> and <b>Amazon</b>.They train you for what it takes to work in the FAANG companies!</p>"
+    +"<p>So what are you guys waiting for? Register now and stand a chance to win exciting prizes!</p>"
+    +"<p>Date: 1st July 2020 at 3PM</p>" 
+    +"<p><b>Registration Link:</b> https://www.codechef.com/PROC2020</p>"
+    +"<p>Entry Fee - <b>₹0</b></p>"
+    +"<p>All you need is an account on Codechef.</p>"
+    +"<p>Top 10 percentile will be awarded with a ranked certificate. Every participant will be awarded with a participation certificate.</p>"
+    +"<p>Regards,Infinite Loop, KJSIEIT Mumbai.</p>";
+*/
