@@ -22,9 +22,13 @@ using namespace std;
 int main() {
     fastIO;
     ll n, arrSum = 0; cin >> n;
-    ll arr[n]; for(ll i = 0; i < n; i++) cin >> arr[i], arrSum += arr[i];
-    for(ll i = 0; i < 1LL<<n; i++) {
-        
+    ll arr[n], ans = LLONG_MAX; for(ll i = 0; i < n; i++) cin >> arr[i], arrSum += arr[i];
+    for(ll i = 0; i < (1LL<<n); i++) {
+        ll keep = 0;
+        for(ll j = 0; j < n; j++)
+            if(1<<j & i) keep += arr[j];
+        ans = min(ans, abs(arrSum - 2*keep));
     }
+    cout << ans;
     return 0;
 }

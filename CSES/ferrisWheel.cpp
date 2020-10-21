@@ -24,9 +24,23 @@ int main() {
     ll n, x; cin >> n >> x;
     ll wt[n]; for(ll i = 0; i < n; i++) cin >> wt[i];
     sort(wt, wt+n);
-    bool vis[n];
-    memset(vis, false, sizeof(vis));
-    ll ans = 0;
-    for(ll i = 0; i < n, !vis[i]; i++)
+    ll i = 0, j = n-1, ans = 0;
+    while(i <= j) {
+        if(i == j) {
+            ans++;
+            break;
+        }
+        //cout << wt[i] << " " << wt[j] << endl;
+        if(wt[i] + wt[j] > x) {
+            ans++;
+            j--;
+        }
+        else {
+            ans++;
+            i++;
+            j--;
+        }
+    }
+    cout << ans;
     return 0;
 }
