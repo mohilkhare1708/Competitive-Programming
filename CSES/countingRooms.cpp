@@ -19,26 +19,15 @@ const ll mod = 1000000007;
 
 using namespace std;
 
-void dfs(vector<vector<bool>> vis, vector<vector<char>> a, ll i, ll j, ll n, ll m) {
-    if(i >= n || j >= m || i <= -1 || j <= -1 | vis[i][j] || a[i][j] == '#')
-        return;
-    vis[i][j] = true;
-    if(i+1 < n && !vis[i+1][j] && a[i+1][j] == '.')
-        dfs(vis, a, i+1, j, n, m);
-    if(i-1 >= 0 && !vis[i-1][j] && a[i-1][j] == '.')
-        dfs(vis, a, i-1, j, n, m);
-    if(j+1 < m && !vis[i][j+1] && a[i][j+1] == '.')
-        dfs(vis, a, i, j+1, n, m);
-    if(j-1 >= 0 && !vis[i][j-1] && a[i][j-1] == '.')
-        dfs(vis, a, i, j-1, n, m);
-    return;
-}
+ll n, m;
+bool vis[1001][1001];
+char a[1001][1001];
+void issok(ll i, ll j);
+void dfs(ll i, ll j);
 
 int main() {
     fastIO;
-    ll n, m; cin >> n >> m;
-    vector<vector<char>> a(n, vector<char>(m, 0));
-    vector<vector<bool>> vis(n, vector<bool>(m, false));
+    cin >> n >> m;
     for(ll i = 0; i < n; i++)
         for(ll j = 0; j < m; j++)
             cin >> a[i][j];
@@ -47,10 +36,26 @@ int main() {
         for(ll j = 0; j < m; j++) {
             if(!vis[i][j] && a[i][j] == '.') {
                 ans++;
-                dfs(vis, a, i, j, n, m);
+                dfs(i, j);
             }
         }
     }
     cout << ans;
     return 0;
+}
+
+void issok(ll i, ll j) {
+    if(i < 0 || i > n-1 || j < 0 || j > m-1)
+        return;
+    if(vis[i][j] || a[i][j] == '#')
+        return;
+    dfs(i, j);
+}
+
+void dfs(ll i, ll j) {
+    vis[i][j] = true;
+    issok(i-1, j);
+    issok(i, j+1);
+    issok(i+1, j);
+    issok(i, j-1);
 }
