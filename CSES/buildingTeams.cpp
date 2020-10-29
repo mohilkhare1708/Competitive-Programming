@@ -1,6 +1,6 @@
 /*
 Author : Mohil Khare
-Created On: 24 October 2020, 17:35
+Created On: 29 October 2020, 15:03
 */
 
 #include <bits/stdc++.h>
@@ -16,52 +16,39 @@ Created On: 24 October 2020, 17:35
 
 // program specific shorts (if any)
 const ll mod = 1000000007;
-const ll MAX = 1e5+1;
 using namespace std;
 
-vvll adj(MAX);
+const ll MAX = 1e5 + 1;
+vll adj[MAX];
+ll n, m, ans[MAX];
+
+void dfs(ll i, ll cur = 0) {
+    if(~ans[i]) {
+        if(ans[i] ^ cur) {
+            cout << "IMPOSSIBLE";
+            exit(0);
+        }
+        return;
+    }
+    ans[i] = cur;
+    for(auto x : adj[i])
+        dfs(x, cur ^ 1);
+}
 
 int main() {
     fastIO;
-    ll n, m; cin >> n >> m;
+    cin >> n >> m;
     for(ll i = 0; i < m; i++) {
         ll a, b; cin >> a >> b;
-        adj[a-1].pb(b-1);
-        adj[b-1].pb(a-1);
+        adj[a].pb(b);
+        adj[b].pb(a);
     }
-    cout << "the graph" << endl;
-    for(ll i = 0; i < n; i++) {
-        for(auto x : adj[i])
-            cout << x << " ";
-        cout << endl;
+    memset(ans, -1, sizeof(ans));
+    for(ll i = 1; i <= n; i++) {
+        if(ans[i] < 0) {
+            dfs(i);
+        } 
     }
-    cout << endl;
-    vector<bool> vis(n, false);
-    vll ans(n, -1);
-    bool poss = true;
-    for(ll i = 0; i < n; i++) {
-        if(vis[i])
-            continue;
-        else {
-            vis[i] = true;
-            ans[i] = 1;
-            for(auto x : adj[i]) {
-                if(ans[x] == 1) {
-                    poss = false;
-                    break;
-                }
-                else {
-                    ans[x] = 2;
-                    vis[x] = true;
-                }
-            }
-            if(!poss) break;
-        }
-        cout << "visiting " << i << endl;
-        for(auto x : vis) cout << x << " "; cout << endl;
-        for(auto x : ans) cout << x << " "; cout << endl;
-    }
-    if(!poss) cout << "IMPOSSIBLE";
-    else for(auto x : ans) cout << x << " ";
+    for(ll i = 1; i <= n; i++) cout << ans[i]+1 << " ";
     return 0;
 }
