@@ -1,0 +1,40 @@
+<p>CodeLand is celebrating a festival by baking cakes! In order to avoid wastage, families follow a unique way of distributing cakes.</p>
+
+<p>For $T$ families in the locality, $i$-th family (1 <= $i$ <= $T$) has $N$ members. They baked $S$ slices of cakes. The smallest member of the family gets $K$ slices of cakes. Each family has a lucky number $R$ and they agree to distribute the slices such that the member gets $R$ times more slices than the member just smaller than them. Since the family is busy in festival preparations, find out if the number of slices would be sufficient for the family or not. Also find how many extra slices they have or how many slices are they short of.</p>
+
+Also, the locality is kind and believes in sharing. So, you also need to determine if each family would have sufficient slices if families shared their cakes among each other!
+
+<h3>Input Description:</h3>
+<ul><li>First line of input will have a single integer $T$ i.e. number of families in locality</li>
+<li>For next $T$ lines, each line will describe one family through 4 integers i.e. $S$, $N$, $K$, $R$ separated by spaces</li></ul>
+
+<h3>Output Description:</h3>
+<ul><li>First $T$ lines of output will show if slices are enough for the family or not, followed by extra or required slices. For example, if slices are sufficient, output would be ‘$POSSIBLE 10$’ which implies 10 slices are extra. If slices are insufficient, output would be ‘$IMPOSSIBLE 15$’ which implies 15 slices are required to fulfill the requirement.</li>
+<li>Last line of output would be ‘$IMPOSSIBLE$’ or ‘$POSSIBLE$’ depending on whether each family would get enough slices after sharing.</li></ul>
+
+<h3>Constraints:</h3>
+<ul><li>1 &le; $T$ &le; 50</li>
+<li>1 &le; $N$ &le; 15</li>
+<li>1 &le; $S$ &le; 10^9</li>
+<li>1 &le; $K$ &le; 5</li>
+<li>1 &le; $R$ &le; 5</li></ul>
+
+<h3>Sample Input:</h3>
+<p>5</p>
+<p>100 4 2 2</p>
+<p>100 4 3 2</p>
+<p>100 4 3 3</p>
+<p>200 4 4 2</p>
+<p>10 3 2 2</p>
+
+<h3>Sample Output:</h3>
+<p>POSSIBLE 70</p>
+<p>POSSIBLE 55</p>
+<p>IMPOSSIBLE 20</p>
+<p>POSSIBLE 140</p>
+<p>IMPOSSIBLE 4</p>
+<p>POSSIBLE</p>
+
+<h3>Explanation</h3>
+<p>For first home, the youngest member has gets 2 slices, the one older than them gets 2 times more slices ans so forth. So, first home needs 2 + 4 + 8 + 16 = 30 slices. But since they made 100, they have 70 extra, hence we print 'POSSIBLE 70'.</p>
+<p>Doing the same for other houses, we find 20 + 4 = 24 slices extra are required so that all families have enough slices. In this case we have 70 + 55 + 140 = 265 extra slices which is &gt; 24, so we print 'POSSIBLE' in last line.</p>

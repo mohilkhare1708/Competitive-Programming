@@ -1,0 +1,28 @@
+*__Note:__ This question earns you __NO__ points, nor a spot on the leaderboard, but it gets you to the __Hall of Fame__*
+
+This is the Brainf**k question!
+
+*I'm done! I'm DONE!!! Enough of this... How hard can adding two numbers be???*
+
+Given are 2 single digit numbers, whose sum is a single digit number, just print it man!
+
+###Input:
+Each test-file will have a two-digit number, these two digits are the numbers you need to add.
+
+###Output:
+Output would be a single-digit number i.e. the sum of the two digits.
+
+###Constraints:
+Input would __never__ be such that resultant sum is a two-digit number.
+
+###Sample Input:
+	35
+
+###Sample Output:
+	8
+
+###Explanation:
+$3+ 5 = 8$
+
+###Advice:
+Try honestly at the risk of your own sanity.

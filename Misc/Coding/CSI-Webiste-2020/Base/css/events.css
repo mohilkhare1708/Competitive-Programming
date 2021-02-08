@@ -1,0 +1,258 @@
+.ab {
+  padding-right: 5px;
+}
+
+.ax {
+  justify-content: space-between;
+  -webkit-box-pack: justify;
+}
+
+.c {
+  background: #fff;
+}
+
+
+.eo {
+  padding-top: 10px;
+}
+
+.ep {
+  padding-bottom: 10px;
+}
+
+.eq {
+  padding-left: 5px;
+}
+
+.k {
+  text-decoration: none;
+}
+
+.v {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.aq {
+  width: 270px;
+}
+
+
+
+.ca {
+  margin-top: 0;
+}
+
+.dc {
+  margin-right: 5px;
+}
+
+
+.ea {
+  min-width: 270px;
+}
+
+.eb {
+  max-width: 270px;
+}
+
+.ec {
+  border-radius: 8px;
+}
+
+.ed {
+  margin-bottom: 20px;
+}
+
+.ee {
+  margin-left: 5px;
+}
+
+.ab {
+  padding-right: 5px;
+}
+
+.ax {
+  justify-content: space-between;
+  -webkit-box-pack: justify;
+}
+
+.c {
+  background: #fff;
+}
+
+
+.ar {
+  flex-shrink: 0;
+}
+
+.bi {
+  align-items: center;
+  -webkit-box-align: center;
+}
+
+.er {
+  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+}
+.es {
+  width: 20%;
+}
+
+.v {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.ew {
+  width: 75%;
+}
+
+.al {
+  font-size: 14px;
+}
+
+.abc {
+  font-size: 30px;
+}
+
+
+.b {
+  overflow: hidden;
+}
+
+.cf {
+  color: #333333;
+}
+
+.ex {
+  white-space: nowrap;
+}
+
+.ey {
+  text-overflow: ellipsis;
+}
+
+.bc {
+  font-size: 15px;
+}
+
+.ev {
+  color: #999999;
+}
+
+.ez {
+  margin-top: 4px;
+}
+
+
+
+
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+.maindiv {
+  background-color: #f1f1f1;
+  padding: 20px;
+  font-family: Arial;
+}
+
+/* Center website */
+.main {
+  max-width: 1000px;
+  margin: auto;
+}
+
+
+
+.row {
+  margin: 8px -16px;
+}
+
+/* Add padding BETWEEN each column */
+.row,
+.row > .column {
+  padding: 8px;
+}
+
+/* Create four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33%;
+}
+
+/* Clear floats after rows */ 
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Content */
+.content {
+  background-color: white;
+  padding: 25px;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 900px) {
+  .column {
+    width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

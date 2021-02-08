@@ -1,0 +1,5 @@
+A quantum computer, in layman's term would be defined as any device which is capable of computation employing the techniques like superposition and entanglement.
+
+A quantum computer we have today is said to be 100 million times faster than any known classical computer and this is when the quantum computing supremacy is still at its infancy.
+
+Quantum computers like Bristlecone and Sycamore are today solving near to impossible problems that would have taken impractical amount of time within seconds. Companies like Volkswagen are using it to simulate the chemical composition of electrical-vehicle batteries to help find new ways to improve their performance. Also, pharmaceutical companies are leveraging them to analyze and compare compounds that could lead to the creation of new drugs. 

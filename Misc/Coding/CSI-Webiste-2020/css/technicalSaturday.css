@@ -1,0 +1,76 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+}
+
+h4.heading {
+    padding-top: 20px;
+    font-size: 41px;
+    font-weight: 300;
+    text-align: center;
+    color: #111;
+}
+
+.line {
+    width: 8%;
+    height: 1px;
+    background: #009688;
+}
+
+.container {
+    text-align: center;
+}
+
+#technical-tuesday {
+    background: #f1f1f1;
+}
+
+.technical-tuesday-item {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border: solid 10px #fff;
+}
+
+.technical-tuesday-item img {
+    width: 100%;
+    height: 100%;
+    transition: transform .4s ease;
+}
+
+#isotope-container {
+    width: 100%;
+}
+
+/*** Hover Effects ***/
+
+.technical-tuesday-item:hover img {
+    transform: scale(1.1);
+}
+
+#isotope-filters {
+    margin-bottom: 10px;
+    padding: 20px 25px;
+}
+
+#isotope-filters button {
+    font-family: 'Raleway', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: transparent;
+    box-shadow: none;
+    outline: 0;
+    padding-right: 35px;
+}
+
+#isotope-filters button span {
+    padding-bottom: 5px;
+    transition: all .4s ease-in-out;
+}
+
+#isotope-filters button.active span {
+    color: #009688;
+    border-bottom: 2px solid #111;
+}

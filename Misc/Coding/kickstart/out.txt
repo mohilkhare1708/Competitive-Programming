@@ -1,0 +1,3 @@
+Case #1: 1
+Case #2: 4
+Time taken by function: 0 microseconds
