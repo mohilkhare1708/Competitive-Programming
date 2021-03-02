@@ -4,6 +4,7 @@ d, i, s, v, f = map(int, input().split())
 graph = defaultdict(lambda: {'in': set(), 'out': set()})
 weights, car_keeper = defaultdict(int), defaultdict(int)
 
+
 for _ in range(s):
     b, e, st, l = map(str, input().split())
     b = int(b)
@@ -22,9 +23,9 @@ for _ in range(v):
         for road in route:
             car_keeper[road] += 1
 
-# print("graph", graph, "\n")
-# print("weights", weights, "\n")
-# print("car_keeper", car_keeper, "\n")
+print("graph", graph, "\n")
+print("weights", weights, "\n")
+print("car_keeper", car_keeper, "\n")
 
 ans = []
 
